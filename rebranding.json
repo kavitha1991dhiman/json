@@ -1,0 +1,958 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "2.0.0",
+    "title": "Citrix Branding Service APIs",
+    "description": "This is Apis for Citrix Branding service.  You can find out more about Citrix Branding service at [https://info.citrite.net/display/xenmobile/Personalisation+Service+Architecture](https://info.citrite.net/display/xenmobile/Personalisation+Service+Architecture) .",
+    "contact": {
+      "name": "Brand Personalization Team",
+      "email": "Brand_Personalization@citrix.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "personalizations",
+      "description": "Everything about your Branding Personalization"
+    }
+  ],
+  "paths": {
+    "/personalizations": {
+      "post": {
+        "description": "Post operation to add personalization",
+        "summary": "Add A New Personalization For Branding",
+        "operationId": "PersonalizationsPost",
+        "tags": [
+          "personalizations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          },
+          {
+            "$ref": "#/components/parameters/Authorization"
+          },
+          {
+            "$ref": "#/components/parameters/TransactionId"
+          },
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Personalization"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/CreatedPersonalization"
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationErrors"
+          },
+          "401": {
+            "$ref": "#/components/responses/Authentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Authorization"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          },
+          "409": {
+            "$ref": "#/components/responses/OptimisticConcurrency"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnSupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      },
+      "get": {
+        "description": "Get operation to fetch personalizations",
+        "summary": "Fetch All The Personalizations Of A Customer",
+        "operationId": "PersonalizationGet",
+        "tags": [
+          "personalizations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          },
+          {
+            "$ref": "#/components/parameters/Authorization"
+          },
+          {
+            "$ref": "#/components/parameters/TransactionId"
+          },
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Citrix-TransactionId": {
+                "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "application/json",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Personalization"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Authentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Authorization"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          }
+        }
+      },
+      "x-summary": "List Of Personalizations"
+    },
+    "/personalizations/{id}": {
+      "put": {
+        "description": "Put operation to update personalization",
+        "summary": "Update A Personalization For Branding",
+        "operationId": "PersonalizationsPut",
+        "tags": [
+          "personalizations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          },
+          {
+            "$ref": "#/components/parameters/Authorization"
+          },
+          {
+            "$ref": "#/components/parameters/PersonalizationId"
+          },
+          {
+            "$ref": "#/components/parameters/TransactionId"
+          },
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Personalization"
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/Updated"
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationErrors"
+          },
+          "401": {
+            "$ref": "#/components/responses/Authentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Authorization"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          },
+          "409": {
+            "$ref": "#/components/responses/OptimisticConcurrency"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnSupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      },
+      "get": {
+        "description": "Get operation to fetch personalizations by id",
+        "summary": "Fetch Personalizations Of A Customer By Id",
+        "operationId": "PersonalizationIdGet",
+        "tags": [
+          "personalizations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          },
+          {
+            "$ref": "#/components/parameters/Authorization"
+          },
+          {
+            "$ref": "#/components/parameters/PersonalizationId"
+          },
+          {
+            "$ref": "#/components/parameters/TransactionId"
+          },
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Citrix-TransactionId": {
+                "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "application/json",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personalization"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Authentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Authorization"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          }
+        }
+      },
+      "x-summary": "Update Or Get Personalization By Id"
+    },
+    "/personalizations/{id}/$promote": {
+      "post": {
+        "description": "Post operation to trigger production deployment",
+        "summary": "Promote Build Beta To Production Environment",
+        "operationId": "PersonalizationsDeploymentPost",
+        "tags": [
+          "personalizations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerId"
+          },
+          {
+            "$ref": "#/components/parameters/Authorization"
+          },
+          {
+            "$ref": "#/components/parameters/PersonalizationId"
+          },
+          {
+            "$ref": "#/components/parameters/TransactionId"
+          },
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/CreatedDeployment"
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationErrors"
+          },
+          "401": {
+            "$ref": "#/components/responses/Authentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Authorization"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          },
+          "409": {
+            "$ref": "#/components/responses/OptimisticConcurrency"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnSupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://personalization.cloudburrito.com"
+    }
+  ],
+  "components": {
+    "requestBodies": {
+      "Personalization": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Personalization"
+            }
+          }
+        },
+        "description": "personalization object",
+        "required": true
+      }
+    },
+    "parameters": {
+      "CustomerId": {
+        "name": "Citrix-CustomerId",
+        "in": "header",
+        "description": "Citrix cloud customer ID",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Authorization": {
+        "name": "Authorization",
+        "in": "header",
+        "required": true,
+        "description": "Bearer or service key token",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "TransactionId": {
+        "name": "Citrix-TransactionId",
+        "in": "header",
+        "description": "Transaction ID",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Accept": {
+        "name": "Accept",
+        "in": "header",
+        "description": "application/json",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "PersonalizationId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "personalization id",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "CreatedPersonalization": {
+        "description": "Created",
+        "headers": {
+          "Location": {
+            "description": "/personalizations/{id}",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreatedDeployment": {
+        "description": "Created",
+        "headers": {
+          "Location": {
+            "description": "/personalizations/{id}/deployment",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Updated": {
+        "description": "No-Content",
+        "headers": {
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ValidationErrors": {
+        "description": "Invalid Parameters",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/brandin/validation",
+          "detail": "Validation failed",
+          "parameters": [
+            {
+              "name": "platform",
+              "value": "platform must be a valid enum value"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "Authentication": {
+        "description": "Authentication failed",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/branding/authentication",
+          "detail": "Missing or invalid authentication details",
+          "parameters": [
+            {
+              "name": "reason",
+              "value": "missing"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "Authorization": {
+        "description": "Authorization failed",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/authorization",
+          "detail": "Access denied",
+          "parameters": [
+            {
+              "name": "entityType",
+              "value": "https://identifiers-api.cloud.com/example/widget"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not Found",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/notFound",
+          "detail": "resource not found",
+          "parameters": [
+            {
+              "name": "entityType",
+              "value": "https://identifiers-api.cloud.com/example/widget"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "NotAcceptable": {
+        "description": "Not Acceptable",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/notAcceptable",
+          "detail": "Must accept application/json media type",
+          "parameters": [
+            {
+              "name": "contentType",
+              "value": "application/json"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "OptimisticConcurrency": {
+        "description": "Optimistic Concurrency",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/optimisticConcurrency",
+          "detail": "Widget X was modified, please try your changes again"
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "UnSupportedMediaType": {
+        "description": "Unsupported Media Type",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/unsupportedMediaType",
+          "detail": "Must use application/json;charset=utf-8 media type",
+          "parameters": [
+            {
+              "name": "mediaType",
+              "value": "application/xml"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "RateLimited": {
+        "description": "Rate Limited Exceeded",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/rateLimitExceeded",
+          "detail": "Rate limit exceeded; try again in 4 seconds",
+          "parameters": [
+            {
+              "name": "retryDelay",
+              "value": "4"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "NotImplemented": {
+        "description": "Not Implemented",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/notImplemented",
+          "detail": "Not implemented"
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "Unavailable": {
+        "description": "Service Unavailable",
+        "headers": {
+          "Citrix-TransactionId": {
+            "description": "Globally-unique identifier (usually a GUID) that allows the flow of a call to be traced through all components within the system.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "X-Content-Type-Options": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-error-response-example": {
+          "type": "https://errors-api.cloud.com/common/serviceUnavailable",
+          "detail": "Service is unavailable; try again in 4 seconds",
+          "parameters": [
+            {
+              "name": "retryDelay",
+              "value": "4"
+            }
+          ]
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Personalization": {
+        "type": "object",
+        "required": [
+          "appName",
+          "platform",
+          "product",
+          "appIconDataURI"
+        ],
+        "properties": {
+          "appName": {
+            "type": "string",
+            "example": "Citrix Mail"
+          },
+          "platform": {
+            "type": "string",
+            "example": "iOS",
+            "enum": [
+              "Android",
+              "iOS",
+              "Windows"
+            ],
+            "description": "platform values"
+          },
+          "product": {
+            "type": "string",
+            "enum": [
+              "Citrix Files",
+              "Citrix Workspace app",
+              "Secure Mail",
+              "Secure Web"
+            ],
+            "example": "Secure Mail",
+            "description": "product values"
+          },
+          "abmId": {
+            "type": "string",
+            "example": "example@citrix.com(**required only for iOS)"
+          },
+          "appIconDataURI": {
+            "type": "string",
+            "example": "data:image/jpeg;base64,/9j/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/yQALCAABAAEBAREA/8wABgAQEAX/2gAIAQEAAD8A0s8g/9k=",
+            "format": "base64 encoded"
+          }
+        }
+      },
+      "ErrorParameters": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorModel": {
+        "type": "object",
+        "required": [
+          "type",
+          "detail"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorParameters"
+            }
+          }
+        }
+      }
+    }
+  }
+}
